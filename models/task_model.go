@@ -1,11 +1,13 @@
-package handlers
+package models
 
 import (
-	"github.com/sheltowt/golang_tasks/models"
+	
 )
 
-type TaskHandler stuct {
+type TaskModel stuct {
 	DB 
 }
 
-func NewTaskHandler
+func NewTaskModel(db ) {
+	
+}

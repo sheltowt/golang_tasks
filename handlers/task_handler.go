@@ -7,3 +7,8 @@ import (
 type TaskHandler stuct {
 
 }
+
+func NewTaskHandler (taskModel models.TaskModel) {
+	return NewTaskHandler{}
+}
+

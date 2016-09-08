@@ -6,7 +6,9 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
     "github.com/gorilla/mux"
-    "github.com/sheltowt/golang_tasks/handlers"
+    "reflect"
+    // "github.com/sheltowt/golang_tasks/handlers"
+    // "github.com/sheltowt/golang_tasks/models"
 )
 
 type Task struct {
@@ -30,8 +32,10 @@ func main() {
 
 	err := c.Find(query).One(&result)
 
-	r := mux.NewRouter()
-	r.HandleFunc("/tasks", TasksHandler)
+	fmt.Println(reflect.TypeOf(c))
 
-	http.Handle("/", r)
+	// r := mux.NewRouter()
+	// r.HandleFunc("/tasks", TasksHandler)
+
+	// http.Handle("/", r)
 }
