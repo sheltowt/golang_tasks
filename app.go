@@ -31,8 +31,6 @@ func main() {
 	session, err := mgo.Dial(url)
 	c := session.DB(database).C(collection)
 
-
-
 	err := c.Find(query).One(&result)
 
 }
