@@ -5,7 +5,7 @@ import (
 	"log"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
-    "github.com/gorilla/mux"
+    // "github.com/gorilla/mux"
     "reflect"
     // "github.com/sheltowt/golang_tasks/handlers"
     // "github.com/sheltowt/golang_tasks/models"
@@ -29,8 +29,6 @@ func main() {
 
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
 	c := session.DB(viper.GetString("database.database")).C("database.collection")
-
-	err := c.Find(query).One(&result)
 
 	fmt.Println(reflect.TypeOf(c))
 

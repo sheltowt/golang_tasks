@@ -5,10 +5,10 @@ import (
 )
 
 type TaskHandler stuct {
-
+	taskModel models.TaskModel
 }
 
 func NewTaskHandler (taskModel models.TaskModel) {
-	return NewTaskHandler{}
+	return NewTaskHandler{taskModel}
 }
 
