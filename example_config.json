@@ -1,0 +1,7 @@
+{
+	"database": {
+		"connection_url": "balalal",
+		"database": "basic_api",
+		"collection": "tasks"
+	}
+}
