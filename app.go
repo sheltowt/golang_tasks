@@ -5,11 +5,8 @@ import (
 	"log"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
-    "encoding/json"
-    "log"
-    "net/http"
- 
     "github.com/gorilla/mux"
+    "github.com/sheltowt/golang_tasks/handlers"
 )
 
 type Task struct {
@@ -32,5 +29,10 @@ func main() {
 	c := session.DB(database).C(collection)
 
 	err := c.Find(query).One(&result)
+
+	r := mux.NewRouter()
+	r.HandleFunc("/tasks", TasksHandler)
+
+
 
 }
