@@ -5,5 +5,7 @@ import (
 )
 
 type TaskHandler stuct {
-
+	DB 
 }
+
+func NewTaskHandler

@@ -33,6 +33,5 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/tasks", TasksHandler)
 
-
-
+	http.Handle("/", r)
 }
