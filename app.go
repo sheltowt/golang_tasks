@@ -5,7 +5,17 @@ import (
 	"log"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
+    "encoding/json"
+    "log"
+    "net/http"
+ 
+    "github.com/gorilla/mux"
 )
+
+type Task struct {
+	Type string `json:"type,omitempty"`
+	Description string `json:"description,omitempty"`
+}
 
 func main() {
 	viper.SetConfigName("golang_config")
