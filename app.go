@@ -27,8 +27,8 @@ func main() {
 
 	log.Println(viper.GetString("database.connection_url"))
 
-	session, err := mgo.Dial(url)
-	c := session.DB(database).C(collection)
+	session, err := mgo.Dial(viper.GetString("database.connection_url"))
+	c := session.DB(viper.GetString("database.database")).C("database.collection")
 
 	err := c.Find(query).One(&result)
 
