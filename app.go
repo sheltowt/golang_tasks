@@ -11,11 +11,6 @@ import (
     "log"
 )
 
-type Task struct {
-	Type string `json:"type,omitempty"`
-	Description string `json:"description,omitempty"`
-}
-
 func main() {
 	viper.SetConfigName("golang_config")
 	viper.AddConfigPath("$HOME/etc/golang_tasks/")
@@ -24,7 +19,7 @@ func main() {
 	if err != nil { 
     	panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
-	
+
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
 	if err != nil { 
     	panic(fmt.Errorf("Fatal error db connection: %s \n", err))

@@ -8,7 +8,7 @@ import (
 type Task struct {
 	Description string `json:"description,omitempty"`
 	Title string `json:"title,omitempty"`
-	Done string `json:"done,omitempty"`
+	Done int `json:"done,omitempty"`
 }
 
 type TaskModel struct {
