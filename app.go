@@ -2,17 +2,15 @@ package main
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
+	"github.com/sheltowt/golang_tasks/handlers"
+	"github.com/sheltowt/golang_tasks/models"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
-    "github.com/gorilla/mux"
-    "github.com/sheltowt/golang_tasks/handlers"
-    "github.com/sheltowt/golang_tasks/models"
-    "net/http"
-    "log"
-    "strings"
+	"log"
+	"net/http"
+	"strings"
 )
-
-
 
 func main() {
 
@@ -22,13 +20,13 @@ func main() {
 	viper.AddConfigPath("$HOME/etc/golang_tasks/")
 	viper.SetConfigType("json")
 	err := viper.ReadInConfig()
-	if err != nil { 
-    	panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	if err != nil {
+		panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
-	if err != nil { 
-    	panic(fmt.Errorf("Fatal error db connection: %s \n", err))
+	if err != nil {
+		panic(fmt.Errorf("Fatal error db connection: %s \n", err))
 	}
 
 	c := session.DB(viper.GetString("database.database")).C(viper.GetString("database.collection"))

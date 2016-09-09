@@ -1,25 +1,25 @@
 package models
 
 import (
+	"gopkg.in/mgo.v2"
 	"log"
-	"gopkg.in/mgo.v2"	
 )
 
 type Task struct {
 	Description string `json:"description,omitempty"`
-	Title string `json:"title,omitempty"`
-	Done int `json:"done,omitempty"`
+	Title       string `json:"title,omitempty"`
+	Done        int    `json:"done,omitempty"`
 }
 
 type TaskModel struct {
 	DB *mgo.Collection
 }
 
-func NewTaskModel(db *mgo.Collection) (TaskModel){
+func NewTaskModel(db *mgo.Collection) TaskModel {
 	return TaskModel{db}
 }
 
-func (taskModel TaskModel) GetTask() (Task) {
+func (taskModel TaskModel) GetTask() Task {
 	task := Task{}
 
 	err := taskModel.DB.Find(nil).One(&task)

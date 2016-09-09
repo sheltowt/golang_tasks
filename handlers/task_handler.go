@@ -1,16 +1,16 @@
 package handlers
 
 import (
-	"net/http"
-	"github.com/sheltowt/golang_tasks/models"
 	"encoding/json"
+	"github.com/sheltowt/golang_tasks/models"
+	"net/http"
 )
 
 type TaskHandler struct {
 	taskModel models.TaskModel
 }
 
-func NewTaskHandler (taskModel models.TaskModel) (TaskHandler) {
+func NewTaskHandler(taskModel models.TaskModel) TaskHandler {
 	return TaskHandler{taskModel}
 }
 
