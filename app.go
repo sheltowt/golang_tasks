@@ -5,10 +5,10 @@ import (
 	"log"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
-    // "github.com/gorilla/mux"
-    "reflect"
-    // "github.com/sheltowt/golang_tasks/handlers"
-    // "github.com/sheltowt/golang_tasks/models"
+    "github.com/gorilla/mux"
+    "github.com/sheltowt/golang_tasks/handlers"
+    "github.com/sheltowt/golang_tasks/models"
+    "net/http"
 )
 
 type Task struct {
@@ -25,15 +25,14 @@ func main() {
     	panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
-	log.Println(viper.GetString("database.connection_url"))
-
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
 	c := session.DB(viper.GetString("database.database")).C("database.collection")
 
-	fmt.Println(reflect.TypeOf(c))
+	taskModel := models.NewTaskModel(c)
+	taskHandler := handlers.NewTaskHandler(taskModel)
 
-	// r := mux.NewRouter()
-	// r.HandleFunc("/tasks", TasksHandler)
+	r := mux.NewRouter()
+	r.HandleFunc("/task", taskHandler.GetTask)
 
-	// http.Handle("/", r)
+	http.Handle("/", r)
 }
