@@ -9,9 +9,15 @@ import (
     "github.com/sheltowt/golang_tasks/models"
     "net/http"
     "log"
+    "strings"
 )
 
+
+
 func main() {
+
+	api_root := "/api/v1.0"
+
 	viper.SetConfigName("golang_config")
 	viper.AddConfigPath("$HOME/etc/golang_tasks/")
 	viper.SetConfigType("json")
@@ -31,7 +37,7 @@ func main() {
 	taskHandler := handlers.NewTaskHandler(taskModel)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/task", taskHandler.GetTask)
+	r.HandleFunc(strings.Join([]string{api_root, "/task"}, ""), taskHandler.GetTask)
 
 	log.Fatal(http.ListenAndServe(":3000", r))
 }
