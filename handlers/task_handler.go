@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 	"github.com/sheltowt/golang_tasks/models"
-	"fmt"
+	"encoding/json"
 )
 
 type TaskHandler struct {
@@ -16,5 +16,5 @@ func NewTaskHandler (taskModel models.TaskModel) (TaskHandler) {
 
 func (taskHandler TaskHandler) GetTask(w http.ResponseWriter, r *http.Request) {
 	task := taskHandler.taskModel.GetTask()
-	w.Write([]byte(fmt.Sprintf("%v", task)))
+	json.NewEncoder(w).Encode(task)
 }

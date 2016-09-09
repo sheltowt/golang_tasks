@@ -24,11 +24,7 @@ func main() {
 	if err != nil { 
     	panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
-
-	log.Println(viper.GetString("database.connection_url"))
-	log.Println(viper.GetString("database.database"))
-	log.Println(viper.GetString("database.collection"))
-
+	
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
 	if err != nil { 
     	panic(fmt.Errorf("Fatal error db connection: %s \n", err))
