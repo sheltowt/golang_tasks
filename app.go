@@ -30,13 +30,11 @@ func main() {
 	log.Println(viper.GetString("database.collection"))
 
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
-	log.Println(err)
+	if err != nil { 
+    	panic(fmt.Errorf("Fatal error db connection: %s \n", err))
+	}
 
 	c := session.DB(viper.GetString("database.database")).C(viper.GetString("database.collection"))
-
-	task := models.Task{}
-
-	err = c.Find(nil).One(&task)
 
 	taskModel := models.NewTaskModel(c)
 	taskHandler := handlers.NewTaskHandler(taskModel)
