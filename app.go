@@ -2,13 +2,13 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"github.com/spf13/viper"
 	"gopkg.in/mgo.v2"
     "github.com/gorilla/mux"
     "github.com/sheltowt/golang_tasks/handlers"
     "github.com/sheltowt/golang_tasks/models"
     "net/http"
+    "log"
 )
 
 type Task struct {
@@ -25,8 +25,18 @@ func main() {
     	panic(fmt.Errorf("Fatal error config file: %s \n", err))
 	}
 
+	log.Println(viper.GetString("database.connection_url"))
+	log.Println(viper.GetString("database.database"))
+	log.Println(viper.GetString("database.collection"))
+
 	session, err := mgo.Dial(viper.GetString("database.connection_url"))
-	c := session.DB(viper.GetString("database.database")).C("database.collection")
+	log.Println(err)
+
+	c := session.DB(viper.GetString("database.database")).C(viper.GetString("database.collection"))
+
+	task := models.Task{}
+
+	err = c.Find(nil).One(&task)
 
 	taskModel := models.NewTaskModel(c)
 	taskHandler := handlers.NewTaskHandler(taskModel)
@@ -34,5 +44,5 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/task", taskHandler.GetTask)
 
-	http.Handle("/", r)
+	log.Fatal(http.ListenAndServe(":3000", r))
 }

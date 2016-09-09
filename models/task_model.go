@@ -1,8 +1,8 @@
 package models
 
 import (
-	"gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"		
+	"log"
+	"gopkg.in/mgo.v2"	
 )
 
 type Task struct {
@@ -19,8 +19,13 @@ func NewTaskModel(db *mgo.Collection) (TaskModel){
 	return TaskModel{db}
 }
 
-func (taskModel TaskModel) GetTask() Task {
+func (taskModel TaskModel) GetTask() (Task) {
 	task := Task{}
-	taskModel.DB.Find(bson.M{}).One(task)
+
+	err := taskModel.DB.Find(nil).One(&task)
+	if err != nil {
+		log.Println(err.Error())
+	}
+
 	return task
 }

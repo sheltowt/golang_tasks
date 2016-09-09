@@ -3,6 +3,7 @@ package handlers
 import (
 	"net/http"
 	"github.com/sheltowt/golang_tasks/models"
+	"fmt"
 )
 
 type TaskHandler struct {
@@ -14,5 +15,6 @@ func NewTaskHandler (taskModel models.TaskModel) (TaskHandler) {
 }
 
 func (taskHandler TaskHandler) GetTask(w http.ResponseWriter, r *http.Request) {
-	taskHandler.taskModel.GetTask()
+	task := taskHandler.taskModel.GetTask()
+	w.Write([]byte(fmt.Sprintf("%v", task)))
 }
